@@ -102,9 +102,10 @@ module Zaif
         end
         # Issue trade.
         # Need api key.
-        def trade(currency_code, price, amount, action, limit = nil, counter_currency_code = "jpy")
+        def trade(currency_code, price, amount, action, comment = nil, limit = nil, counter_currency_code = "jpy")
             currency_pair = currency_code + "_" + counter_currency_code
             params = {:currency_pair => currency_pair, :action => action, :price => price, :amount => amount}
+            params.store(:comment, comment) if comment
             params.store(:limit, limit) if limit
             json = post_ssl(@zaif_trade_url, "trade", params)
             return json
@@ -112,14 +113,14 @@ module Zaif
 
         # Issue bid order.
         # Need api key.
-        def bid(currency_code, price, amount, limit = nil, counter_currency_code = "jpy")
-            return trade(currency_code, price, amount, "bid", limit, counter_currency_code)
+        def bid(currency_code, price, amount, comment = nil, limit = nil, counter_currency_code = "jpy")
+            return trade(currency_code, price, amount, "bid", comment, limit, counter_currency_code)
         end
 
         # Issue ask order.
         # Need api key.
-        def ask(currency_code, price, amount, limit = nil, counter_currency_code = "jpy")
-            return trade(currency_code, price, amount, "ask", limit, counter_currency_code)
+        def ask(currency_code, price, amount, comment = nil, limit = nil, counter_currency_code = "jpy")
+            return trade(currency_code, price, amount, "ask", comment, limit, counter_currency_code)
         end
 
         # Cancel order.
