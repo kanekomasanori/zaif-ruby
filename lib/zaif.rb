@@ -159,8 +159,8 @@ module Zaif
             begin
                 https = Net::HTTP.new(uri.host, uri.port)
                 https.use_ssl = true
-                https.open_timeout = 5
-                https.read_timeout = 15
+                https.open_timeout = 10 
+                https.read_timeout = 30
                 https.verify_mode = OpenSSL::SSL::VERIFY_PEER
                 https.verify_depth = 5
 
@@ -197,8 +197,8 @@ module Zaif
 
                 https = Net::HTTP.new(uri.host, uri.port)
                 https.use_ssl = true
-                https.open_timeout = 5
-                https.read_timeout = 15
+                https.open_timeout = 10 
+                https.read_timeout = 30
                 https.verify_mode = OpenSSL::SSL::VERIFY_PEER
                 https.verify_depth = 5
 
